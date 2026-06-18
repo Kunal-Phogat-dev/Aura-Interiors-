@@ -14,8 +14,9 @@ export default function Home() {
 
   // Global scroll calculation
   const scrollVh = windowHeight > 0 ? scrollY / windowHeight : 0;
-  const portfolioOpacity = Math.min(1, Math.max(0, (scrollVh - 14.5) / 0.5));
-  const visionCardsOpacity = Math.min(1, Math.max(0, 1 - (scrollVh - 14.5) / 0.5));
+  // Fade out vision cards / fade in portfolio peeling stack at 9.0vh
+  const portfolioOpacity = Math.min(1, Math.max(0, (scrollVh - 9.0) / 0.5));
+  const visionCardsOpacity = Math.min(1, Math.max(0, 1 - (scrollVh - 9.0) / 0.5));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,8 +40,7 @@ export default function Home() {
   // Phase 4: Final fade to solid black for a seamless exit into the next section (7.0vh to 7.5vh)
   const exitFadeProgress = Math.min(1, Math.max(0, (scrollY - windowHeight * 7.0) / (windowHeight * 0.5)));
 
-  // Phase 5: Horizontal scroll for Vision section glassmorphism cards (7.5vh to 14.5vh)
-  const cardScrollProgress = Math.min(1, Math.max(0, (scrollY - windowHeight * 7.5) / (windowHeight * 7.0)));
+  // Phase 5: Vision section auto-slider (handled internally in Portfolio)
 
   return (
     <div className="bg-black text-zinc-100 font-sans min-h-[100dvh]">
@@ -56,7 +56,6 @@ export default function Home() {
       <Portfolio 
         scrollY={scrollY}
         windowHeight={windowHeight}
-        cardScrollProgress={cardScrollProgress}
         visionCardsOpacity={visionCardsOpacity}
         portfolioOpacity={portfolioOpacity}
       />

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export default function Portfolio({
   scrollY,
@@ -11,10 +12,18 @@ export default function Portfolio({
 }: {
   scrollY: number;
   windowHeight: number;
-  cardScrollProgress: number;
   visionCardsOpacity: number;
   portfolioOpacity: number;
 }) {
+  const [activeCard, setActiveCard] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCard(prev => (prev + 1) % 4);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollVh = windowHeight > 0 ? scrollY / windowHeight : 0;
 
   const portfolioProjects = [
@@ -25,9 +34,9 @@ export default function Portfolio({
   ];
 
   return (
-    <section className="relative h-[1200vh] bg-black z-10">
+    <section className="relative h-[600vh] bg-black z-10">
       <div id="design" className="absolute top-[50vh] left-0 w-full h-1 pointer-events-none" />
-      <div id="portfolio" className="absolute top-[650vh] left-0 w-full h-1 pointer-events-none" />
+      <div id="portfolio" className="absolute top-[300vh] left-0 w-full h-1 pointer-events-none" />
       
       <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
         
@@ -42,45 +51,16 @@ export default function Portfolio({
             { id: 3, title: 'Modern Kitchen', desc: 'Dark marble and gold details in a kitchen made for looking great and cooking easily.', img: '/images/kitchen.png' },
             { id: 4, title: 'Relaxing Bathroom', desc: 'Making your daily routine feel special with nice lighting and natural stone.', img: '/images/bathroom.png' }
           ].map((card, idx) => {
-            const startProgress = idx * 0.25;
-            const endProgress = (idx + 1) * 0.25;
-
-            // Local progress for this card (0 to 1)
-            let localProgress = 0;
-            if (cardScrollProgress >= startProgress && cardScrollProgress <= endProgress) {
-              localProgress = (cardScrollProgress - startProgress) / 0.25;
-            } else if (cardScrollProgress > endProgress) {
-              localProgress = 1;
-            } else {
-              localProgress = 0;
-            }
-
-            // Create entrance, hold, and exit phases for opacity/scale only
-            let effectiveDiff = 0; 
-            if (localProgress < 0.2) {
-              // Entrance (0.0 to 0.2)
-              effectiveDiff = -1 + (localProgress / 0.2);
-            } else if (localProgress > 0.8) {
-              // Exit (0.8 to 1.0)
-              effectiveDiff = (localProgress - 0.8) / 0.2;
-            } else {
-              // Hold phase (0.2 to 0.8)
-              effectiveDiff = 0;
-            }
-            
-            const scale = Math.max(0.8, 1 - Math.abs(effectiveDiff) * 0.2);
-            const opacity = Math.max(0, 1 - Math.abs(effectiveDiff));
-            
-            // Do not translate horizontally; keep it perfectly in the view position
-            const translateX = 0; 
-            const isActive = effectiveDiff === 0;
+            const isActive = idx === activeCard;
+            const scale = isActive ? 1 : 0.8;
+            const opacity = isActive ? 1 : 0;
 
             return (
               <div 
                 key={card.id}
-                className="absolute top-1/2 -translate-y-1/2 left-[5vw] md:left-[10vw] lg:left-[15vw] w-[300px] md:w-[400px] lg:w-[450px] h-[450px] md:h-[600px] rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] origin-center"
+                className="absolute top-1/2 -translate-y-1/2 left-[5vw] md:left-[10vw] lg:left-[15vw] w-[300px] md:w-[400px] lg:w-[450px] h-[450px] md:h-[600px] rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.5)] origin-center transition-all duration-[1000ms] ease-in-out"
                 style={{
-                  transform: `translate3d(${translateX}vw, 0, 0) scale(${scale})`,
+                  transform: `scale(${scale})`,
                   opacity: opacity,
                   pointerEvents: isActive ? 'auto' : 'none',
                   zIndex: isActive ? 30 : 10
@@ -115,7 +95,7 @@ export default function Portfolio({
         >
           <div className="relative w-[300px] md:w-[450px] lg:w-[500px] h-[400px] md:h-[600px] -mt-32 lg:-mt-16">
             {portfolioProjects.map((project, index) => {
-              const startPeel = 15.5 + index;
+              const startPeel = 10.0 + index;
               // The final card should not peel away so that it smoothly transitions into the next section
               const peelProgress = index === portfolioProjects.length - 1 ? 0 : Math.min(1, Math.max(0, scrollVh - startPeel));
               const yTranslate = peelProgress * 150; // vh down
@@ -188,11 +168,11 @@ export default function Portfolio({
       {/* Dynamic Portfolio Text */}
       {portfolioProjects.map((project, index) => {
         // Sharp, seamless crossfade logic
-        const fadeInStart = index === 0 ? 14.0 : 14.9 + index;
-        const fadeInEnd = index === 0 ? 14.0 : 15.1 + index;
+        const fadeInStart = index === 0 ? 9.0 : 9.9 + index;
+        const fadeInEnd = index === 0 ? 9.0 : 10.1 + index;
         // The final text should not fade out, let it scroll away cleanly with the section
-        const fadeOutStart = index === portfolioProjects.length - 1 ? 999 : 15.9 + index;
-        const fadeOutEnd = index === portfolioProjects.length - 1 ? 999 : 16.1 + index;
+        const fadeOutStart = index === portfolioProjects.length - 1 ? 999 : 10.9 + index;
+        const fadeOutEnd = index === portfolioProjects.length - 1 ? 999 : 11.1 + index;
 
         let textOpacity = 1;
         if (scrollVh < fadeInStart) {
