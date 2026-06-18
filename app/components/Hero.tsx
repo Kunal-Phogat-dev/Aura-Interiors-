@@ -42,7 +42,7 @@ export default function Hero({
 
   return (
     <section className="relative h-[750vh]">
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
         
       {/* Intro Phase: "AURA" Text Mask */}
       <div 
@@ -135,7 +135,7 @@ export default function Hero({
 
       {/* Hero Text */}
       <div 
-        className={`absolute inset-0 flex flex-col justify-end pointer-events-none z-30 pb-12 md:pb-24 lg:pb-32`}
+        className={`absolute inset-0 flex flex-col justify-end pointer-events-none z-30 pb-24 md:pb-32`}
       >
         <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-center md:items-start text-center md:text-left">
           <h3 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white drop-shadow-2xl leading-tight">
