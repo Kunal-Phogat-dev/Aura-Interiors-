@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     // 2. Check validation
     if (!full_name || !phone || !requirement || !email || !budget) {
       console.log("2. Error: Missing fields");
-      return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+      return NextResponse.json({ error: 'Name, email, phone, and requirement are required.' }, { status: 400 });
     }
 
     console.log("3. Checking for duplicate email in SheetDB...");
@@ -85,7 +85,41 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    console.log("7. SUCCESS! Data inserted:", data);
+    console.log("7. SUCCESS! Data inserted into Supabase:", data);
+
+    // 5. Post to SheetDB if URL is configured
+    if (sheetdbUrl && sheetdbUrl.startsWith("http")) {
+      console.log("8. Pushing data to SheetDB...");
+      try {
+        const postRes = await fetch(sheetdbUrl, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            data: [
+              {
+                full_name,
+                email,
+                phone,
+                requirement,
+                budget,
+                source: 'website'
+              }
+            ]
+          })
+        });
+        if (!postRes.ok) {
+          console.error("Failed to insert into SheetDB", await postRes.text());
+        } else {
+          console.log("Successfully inserted into SheetDB!");
+        }
+      } catch (err) {
+        console.error("SheetDB POST error:", err);
+      }
+    }
+
     return NextResponse.json({ success: true, lead: data }, { status: 200 });
 
   } catch (error) {

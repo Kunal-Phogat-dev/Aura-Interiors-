@@ -44,7 +44,9 @@ export default function Contact() {
           router.push('/');
         }, 2000);
       } else {
-        console.error("Failed to submit, status:", response.status);
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Failed to submit, status:", response.status, errorData);
+        alert(errorData.error || "Failed to submit form. Please ensure all fields are filled.");
       }
     } catch (error) {
       console.error("Failed to submit", error);
@@ -152,6 +154,7 @@ export default function Contact() {
                   </label>
                   {field.type === 'select' ? (
                     <select
+                      required
                       name={field.id}
                       className="w-full bg-transparent border-b border-white/20 pb-4 pt-2 text-white font-serif text-xl md:text-2xl outline-none focus:border-accent transition-colors duration-500 appearance-none cursor-pointer"
                       value={selectedService}
@@ -164,6 +167,7 @@ export default function Contact() {
                     </select>
                   ) : (
                     <input 
+                      required
                       name={field.id}
                       type={field.type} 
                       placeholder={field.placeholder}
