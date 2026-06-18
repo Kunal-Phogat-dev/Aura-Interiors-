@@ -43,7 +43,7 @@ export default function Home() {
   const cardScrollProgress = Math.min(1, Math.max(0, (scrollY - windowHeight * 7.5) / (windowHeight * 7.0)));
 
   return (
-    <div className="bg-black text-zinc-100 font-sans min-h-screen">
+    <div className="bg-black text-zinc-100 font-sans min-h-[100dvh]">
       <Navbar expandProgress={expandProgress} />
       
       <Hero 

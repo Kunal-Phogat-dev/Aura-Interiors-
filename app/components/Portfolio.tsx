@@ -29,7 +29,7 @@ export default function Portfolio({
       <div id="design" className="absolute top-[50vh] left-0 w-full h-1 pointer-events-none" />
       <div id="portfolio" className="absolute top-[650vh] left-0 w-full h-1 pointer-events-none" />
       
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col justify-center px-6 md:px-12 lg:px-20 overflow-hidden">
         
         {/* Glassmorphism Cards Isolated Track */}
         <motion.div 
@@ -139,7 +139,7 @@ export default function Portfolio({
         </div>
 
         {/* Right-aligned Typography Overlays */}
-        <div className="absolute bottom-12 md:bottom-24 lg:bottom-32 right-6 md:right-12 lg:right-20 flex flex-col items-end text-right z-20 pointer-events-none w-[600px] h-[200px]">
+        <div className="absolute bottom-12 md:bottom-24 lg:bottom-32 right-6 md:right-12 lg:right-20 flex flex-col items-end text-right z-20 pointer-events-none w-[calc(100vw-3rem)] md:w-[600px] h-auto md:h-[200px]">
           
           {/* Design Text */}
           <motion.div 
