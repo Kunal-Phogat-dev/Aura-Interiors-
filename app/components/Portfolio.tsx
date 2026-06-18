@@ -55,14 +55,24 @@ export default function Portfolio({
               localProgress = 0;
             }
 
-            // Continuous motion without holding
-            const effectiveDiff = -1 + (localProgress * 2); // Maps 0->1 to -1->1
+            // Create entrance, hold, and exit phases for opacity/scale only
+            let effectiveDiff = 0; 
+            if (localProgress < 0.2) {
+              // Entrance (0.0 to 0.2)
+              effectiveDiff = -1 + (localProgress / 0.2);
+            } else if (localProgress > 0.8) {
+              // Exit (0.8 to 1.0)
+              effectiveDiff = (localProgress - 0.8) / 0.2;
+            } else {
+              // Hold phase (0.2 to 0.8)
+              effectiveDiff = 0;
+            }
             
             const scale = Math.max(0.8, 1 - Math.abs(effectiveDiff) * 0.2);
-            const opacity = Math.max(0, 1 - Math.abs(effectiveDiff) * 1.2);
+            const opacity = Math.max(0, 1 - Math.abs(effectiveDiff));
             
-            // Map effectiveDiff to translation (-1 -> +100vw, 1 -> -100vw)
-            const translateX = -effectiveDiff * 100; // vw
+            // Do not translate horizontally; keep it perfectly in the view position
+            const translateX = 0; 
             const isActive = effectiveDiff === 0;
 
             return (
