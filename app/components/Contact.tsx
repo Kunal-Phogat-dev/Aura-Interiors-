@@ -36,12 +36,12 @@ export default function Contact() {
       if (response.status === 409) {
         setIsDuplicate(true);
         setTimeout(() => {
-          router.push('/');
+          window.location.href = '/';
         }, 2000);
       } else if (response.ok) {
         setIsSubmitted(true);
         setTimeout(() => {
-          router.push('/');
+          window.location.href = '/';
         }, 2000);
       } else {
         const errorData = await response.json().catch(() => ({}));
