@@ -32,6 +32,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} h-full antialiased dark`}
     >
+      <head>
+        <link rel="preload" href="/hero-interior.png" as="image" />
+      </head>
       <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50">{children}</body>
     </html>
   );

@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 export default function Hero({ 
   circleProgress, 
   expandProgress, 
@@ -50,7 +52,10 @@ export default function Hero({
           transform: `scale(${1 + circleProgress * 3})`,
         }}
       >
-        <span 
+        <motion.span 
+          initial={{ opacity: 0, y: -80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
           className="text-5xl sm:text-7xl md:text-9xl font-bold tracking-[0.4em] font-serif ml-[0.4em]"
           style={{
             backgroundImage: "url('/hero-interior.png')",
@@ -62,7 +67,7 @@ export default function Hero({
           }}
         >
           AURA
-        </span>
+        </motion.span>
       </div>
 
       {/* Phase 2: Expanding Arched Columns */}
