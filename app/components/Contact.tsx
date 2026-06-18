@@ -156,7 +156,7 @@ export default function Contact() {
                     <select
                       required
                       name={field.id}
-                      className="w-full bg-transparent border-b border-white/20 pb-4 pt-2 text-white font-serif text-xl md:text-2xl outline-none focus:border-accent transition-colors duration-500 appearance-none cursor-pointer"
+                      className="w-full bg-[#111111]/50 border border-[#333333] rounded-sm px-4 py-3 md:py-4 text-white font-serif text-base md:text-lg outline-none focus:border-[#C9A84C] transition-colors duration-300 appearance-none cursor-pointer"
                       value={selectedService}
                       onChange={(e) => setSelectedService(e.target.value)}
                     >
@@ -171,7 +171,7 @@ export default function Contact() {
                       name={field.id}
                       type={field.type} 
                       placeholder={field.placeholder}
-                      className="w-full bg-transparent border-b border-white/20 pb-4 pt-2 text-white font-serif text-xl md:text-2xl outline-none placeholder:text-zinc-700 focus:border-accent transition-colors duration-500"
+                      className="w-full bg-[#111111]/50 border border-[#333333] rounded-sm px-4 py-3 md:py-4 text-white font-serif text-base md:text-lg outline-none placeholder:text-[#555555] focus:border-[#C9A84C] transition-colors duration-300"
                     />
                   )}
                 </motion.div>
@@ -186,7 +186,7 @@ export default function Contact() {
               >
                 <button disabled={isSubmitting} type="submit" className="w-full py-6 bg-white text-black font-semibold tracking-[0.2em] uppercase text-sm hover:text-white transition-colors duration-500 rounded-none relative overflow-hidden group disabled:opacity-50">
                   <span className="relative z-10 transition-colors duration-500">{isSubmitting ? "Submitting..." : "Submit Form"}</span>
-                  <div className="absolute inset-0 bg-accent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                  <div className="absolute inset-0 bg-[#C9A84C] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                 </button>
               </motion.div>
             </form>

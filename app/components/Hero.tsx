@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Hero({ 
   circleProgress, 
@@ -42,6 +43,19 @@ export default function Hero({
 
   return (
     <section className="relative h-[750vh]">
+      {/* Background Image for Performance (LCP) */}
+      <div 
+        className="absolute inset-0 pointer-events-none -z-10"
+        style={{ opacity: expandProgress }}
+      >
+        <Image 
+          src="/hero-interior.png" 
+          alt="Bespoke Luxury Interiors" 
+          priority 
+          fill 
+          className="object-cover" 
+        />
+      </div>
       <div className="sticky top-0 h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
         
       {/* Intro Phase: "AURA" Text Mask */}
@@ -56,7 +70,7 @@ export default function Hero({
           initial={{ opacity: 0, y: -80 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl sm:text-7xl md:text-9xl font-bold tracking-[0.4em] font-serif ml-[0.4em]"
+          className="text-5xl sm:text-7xl md:text-9xl font-medium tracking-tight font-serif"
           style={{
             backgroundImage: "url('/hero-interior.png')",
             backgroundAttachment: "fixed",
@@ -137,16 +151,22 @@ export default function Hero({
       <div 
         className={`absolute inset-0 flex flex-col justify-end pointer-events-none z-30 pb-24 md:pb-32`}
       >
-        <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-center md:items-start text-center md:text-left">
-          <h3 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white drop-shadow-2xl leading-tight">
-            {renderLetterByLetter("Your space. ", 0, expandProgress === 1)}
-            <span className="font-bold italic text-accent drop-shadow-xl">
-              {renderLetterByLetter("Reimagined.", 480, expandProgress === 1)}
+        <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-center md:items-start text-center md:text-left pointer-events-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-medium tracking-tight font-serif text-white drop-shadow-2xl leading-tight">
+            {renderLetterByLetter("Bespoke Luxury ", 0, expandProgress === 1)}
+            <span className="font-medium italic text-accent drop-shadow-xl">
+              {renderLetterByLetter("Interiors.", 480, expandProgress === 1)}
             </span>
-          </h3>
-          <p className="mt-4 md:mt-6 text-sm md:text-[19px] font-bold font-sans tracking-[0.2em] md:tracking-[0.3em] uppercase text-accent drop-shadow-lg">
-            {renderLetterByLetter("Spaces That Feel Like You", 1000, expandProgress === 1)}
+          </h1>
+          <p className="mt-4 md:mt-6 text-sm md:text-[19px] font-medium font-sans tracking-tight text-zinc-300 drop-shadow-lg max-w-2xl">
+            {renderLetterByLetter("Elevating Pune's finest residences through uncompromising craftsmanship and curated design.", 1000, expandProgress === 1)}
           </p>
+          
+          <div className={`transition-all duration-1000 delay-[2000ms] ${expandProgress === 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <a href="#contact" className="inline-block mt-8 px-8 py-4 bg-[#C9A84C] text-[#111111] font-semibold text-sm tracking-wide uppercase hover:bg-white transition-colors duration-300">
+              Book Your Private Consultation
+            </a>
+          </div>
         </div>
       </div>
 
