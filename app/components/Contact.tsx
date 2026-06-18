@@ -36,12 +36,22 @@ export default function Contact() {
       if (response.status === 409) {
         setIsDuplicate(true);
         setTimeout(() => {
-          window.location.href = '/';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            setIsDuplicate(false);
+            setIsSubmitted(false);
+            setSelectedService("");
+          }, 1000);
         }, 2000);
       } else if (response.ok) {
         setIsSubmitted(true);
         setTimeout(() => {
-          window.location.href = '/';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            setIsDuplicate(false);
+            setIsSubmitted(false);
+            setSelectedService("");
+          }, 1000);
         }, 2000);
       } else {
         const errorData = await response.json().catch(() => ({}));
@@ -128,7 +138,7 @@ export default function Contact() {
                   : "Thank you for reaching out. Our team will contact you within 2 hours."}
               </p>
               <p className="text-zinc-600 font-sans text-sm">
-                Redirecting to home...
+                Redirecting...
               </p>
             </motion.div>
           ) : (
