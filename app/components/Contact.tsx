@@ -58,7 +58,7 @@ export default function Contact() {
       <div className="max-w-[100rem] mx-auto flex flex-col lg:flex-row gap-20 lg:gap-32 mb-32">
         
         {/* Left Column: Typography & Info */}
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 flex flex-col justify-between items-center md:items-start text-center md:text-left">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -80,7 +80,7 @@ export default function Contact() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: false }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="mt-20 flex flex-col gap-6 text-zinc-500 font-sans text-sm"
+            className="mt-20 flex flex-col gap-6 text-zinc-500 font-sans text-sm items-center md:items-start"
           >
             <div>
               <strong className="text-white uppercase tracking-widest text-xs block mb-2">Studio</strong>

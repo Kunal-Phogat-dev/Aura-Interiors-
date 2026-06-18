@@ -137,8 +137,8 @@ export default function Hero({
       <div 
         className={`absolute inset-0 flex flex-col justify-end pointer-events-none z-30 pb-12 md:pb-24 lg:pb-32`}
       >
-        <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-start">
-          <h3 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white text-left drop-shadow-2xl leading-tight">
+        <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-center md:items-start text-center md:text-left">
+          <h3 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white drop-shadow-2xl leading-tight">
             {renderLetterByLetter("Your space. ", 0, expandProgress === 1)}
             <span className="font-bold italic text-accent drop-shadow-xl">
               {renderLetterByLetter("Reimagined.", 480, expandProgress === 1)}
