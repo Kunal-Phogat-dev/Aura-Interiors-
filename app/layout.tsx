@@ -35,7 +35,7 @@ export default function RootLayout({
       <head>
         <link rel="preload" href="/hero-interior.png" as="image" />
       </head>
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50">{children}</body>
+      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-50 overflow-x-hidden">{children}</body>
     </html>
   );
 }
