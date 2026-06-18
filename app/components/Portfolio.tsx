@@ -16,11 +16,19 @@ export default function Portfolio({
   portfolioOpacity: number;
 }) {
   const [activeCard, setActiveCard] = useState(0);
+  const [activePortfolio, setActivePortfolio] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCard(prev => (prev + 1) % 4);
     }, 1500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePortfolio(prev => (prev + 1) % 4);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -34,7 +42,7 @@ export default function Portfolio({
   ];
 
   return (
-    <section className="relative h-[600vh] bg-black z-10">
+    <section className="relative h-[350vh] bg-black z-10">
       <div id="design" className="absolute top-[50vh] left-0 w-full h-1 pointer-events-none" />
       <div id="portfolio" className="absolute top-[300vh] left-0 w-full h-1 pointer-events-none" />
       
@@ -95,18 +103,20 @@ export default function Portfolio({
         >
           <div className="relative w-[300px] md:w-[450px] lg:w-[500px] h-[400px] md:h-[600px] -mt-32 lg:-mt-16">
             {portfolioProjects.map((project, index) => {
-              const startPeel = 10.0 + index;
-              // The final card should not peel away so that it smoothly transitions into the next section
-              const peelProgress = index === portfolioProjects.length - 1 ? 0 : Math.min(1, Math.max(0, scrollVh - startPeel));
-              const yTranslate = peelProgress * 150; // vh down
-              const rotation = peelProgress * 10; // slight spin
+              const isActive = index === activePortfolio;
+              const isPast = index < activePortfolio;
+              
+              const yTranslate = isPast ? 150 : 0; // vh down
+              const rotation = isPast ? 10 : 0; // slight spin
+              const itemOpacity = isPast ? 0 : 1;
               
               return (
                 <div 
                   key={project.id}
-                  className="absolute inset-0 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-white/10"
+                  className="absolute inset-0 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] border border-white/10 transition-all duration-1000 ease-in-out"
                   style={{
                     transform: `translateY(${yTranslate}vh) rotate(${rotation}deg)`,
+                    opacity: itemOpacity,
                     zIndex: 10 - index
                   }}
                 >
@@ -167,34 +177,16 @@ export default function Portfolio({
 
       {/* Dynamic Portfolio Text */}
       {portfolioProjects.map((project, index) => {
-        // Sharp, seamless crossfade logic
-        const fadeInStart = index === 0 ? 9.0 : 9.9 + index;
-        const fadeInEnd = index === 0 ? 9.0 : 10.1 + index;
-        // The final text should not fade out, let it scroll away cleanly with the section
-        const fadeOutStart = index === portfolioProjects.length - 1 ? 999 : 10.9 + index;
-        const fadeOutEnd = index === portfolioProjects.length - 1 ? 999 : 11.1 + index;
-
-        let textOpacity = 1;
-        if (scrollVh < fadeInStart) {
-          textOpacity = 0;
-        } else if (scrollVh < fadeInEnd) {
-          textOpacity = (scrollVh - fadeInStart) / (fadeInEnd - fadeInStart);
-        } else if (scrollVh > fadeOutEnd) {
-          textOpacity = 0;
-        } else if (scrollVh > fadeOutStart) {
-          textOpacity = 1 - (scrollVh - fadeOutStart) / (fadeOutEnd - fadeOutStart);
-        }
-
-        const isVisible = textOpacity > 0;
+        const isVisible = index === activePortfolio;
 
         return (
           <div 
             key={project.id}
-            className="absolute bottom-0 right-0 flex flex-col items-end w-full"
+            className="absolute bottom-0 right-0 flex flex-col items-end w-full transition-all duration-1000 ease-in-out"
             style={{ 
-              opacity: textOpacity * portfolioOpacity,
-              pointerEvents: isVisible ? 'auto' : 'none',
-              display: isVisible ? 'flex' : 'none'
+              opacity: isVisible ? portfolioOpacity : 0,
+              transform: `translateY(${isVisible ? 0 : 20}px)`,
+              pointerEvents: isVisible ? 'auto' : 'none'
             }}
           >
             <h3 className="text-accent uppercase tracking-[0.2em] text-sm md:text-base font-semibold mb-6">Project {project.id}</h3>
