@@ -161,8 +161,7 @@ export default function Hero({
           <p className="mt-4 md:mt-6 text-sm md:text-[19px] font-medium font-sans tracking-tight text-zinc-300 drop-shadow-lg max-w-2xl">
             {renderLetterByLetter("Elevating Pune's finest residences through uncompromising craftsmanship and curated design.", 1000, expandProgress === 1)}
           </p>
-          
-          <div className={`transition-all duration-1000 delay-[2000ms] ${expandProgress === 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className={`transition-all duration-1000 ${expandProgress === 1 ? "opacity-100 translate-y-0 delay-[2000ms]" : "opacity-0 translate-y-8 delay-0 pointer-events-none"}`}>
             <a href="#contact" className="inline-block mt-8 px-8 py-4 bg-[#C9A84C] text-[#111111] font-semibold text-sm tracking-wide uppercase hover:bg-white transition-colors duration-300">
               Book Your Private Consultation
             </a>
