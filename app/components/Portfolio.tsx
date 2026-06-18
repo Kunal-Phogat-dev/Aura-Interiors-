@@ -153,7 +153,7 @@ export default function Portfolio({
               }}
               initial="hidden"
               animate={scrollY >= windowHeight * 7.4 ? "visible" : "hidden"}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight font-serif text-white leading-[1.2] mb-6"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight font-serif text-white leading-tight mb-6"
             >
               {"We don't just design rooms.".split("").map((char, index) => (
                 <motion.span
@@ -218,7 +218,7 @@ export default function Portfolio({
             }}
           >
             <h3 className="text-accent uppercase tracking-[0.2em] text-sm md:text-base font-semibold mb-6">Project {project.id}</h3>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight font-serif text-white leading-[1.2] mb-6 drop-shadow-lg">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-[50px] font-bold tracking-tight font-serif text-white leading-tight mb-6 drop-shadow-lg">
               {project.title}<br/>
               <span className="font-semibold italic text-zinc-400 block text-lg md:text-xl lg:text-2xl mt-4 max-w-xl text-right leading-relaxed font-sans normal-case drop-shadow-md">{project.desc}</span>
             </h2>

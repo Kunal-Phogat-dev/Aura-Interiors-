@@ -17,7 +17,7 @@ export default function Materials() {
             >
               Materials & Quality
             </motion.h3>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight font-serif text-white leading-[1.1] overflow-hidden">
+            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight font-serif text-white leading-tight overflow-hidden">
               <motion.span 
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}

@@ -66,7 +66,7 @@ export default function Contact() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             <h3 className="text-accent uppercase tracking-[0.2em] text-sm md:text-base font-semibold mb-6">Contact Us</h3>
-            <h2 className="text-5xl sm:text-7xl md:text-[6rem] lg:text-[7rem] font-black tracking-tight font-serif text-white leading-[1.0] mb-8">
+            <h2 className="text-4xl sm:text-6xl md:text-[6rem] lg:text-[7rem] font-black tracking-tight font-serif text-white leading-tight mb-8 break-words">
               Let's Build<br/>
               <span className="italic text-zinc-600">Your Dream Home.</span>
             </h2>

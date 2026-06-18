@@ -51,7 +51,7 @@ export default function Hero({
         }}
       >
         <span 
-          className="text-7xl sm:text-8xl md:text-9xl font-bold tracking-[0.4em] font-serif ml-[0.4em]"
+          className="text-5xl sm:text-7xl md:text-9xl font-bold tracking-[0.4em] font-serif ml-[0.4em]"
           style={{
             backgroundImage: "url('/hero-interior.png')",
             backgroundAttachment: "fixed",
@@ -133,13 +133,13 @@ export default function Hero({
         className={`absolute inset-0 flex flex-col justify-end pointer-events-none z-30 pb-12 md:pb-24 lg:pb-32`}
       >
         <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col items-start">
-          <h3 className="text-[41px] md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white text-left drop-shadow-2xl">
+          <h3 className="text-3xl sm:text-4xl md:text-[53px] lg:text-[65px] font-black tracking-tight font-serif text-white text-left drop-shadow-2xl leading-tight">
             {renderLetterByLetter("Your space. ", 0, expandProgress === 1)}
             <span className="font-bold italic text-accent drop-shadow-xl">
               {renderLetterByLetter("Reimagined.", 480, expandProgress === 1)}
             </span>
           </h3>
-          <p className="mt-4 md:mt-6 text-[17px] md:text-[19px] font-bold font-sans tracking-[0.3em] uppercase text-accent drop-shadow-lg">
+          <p className="mt-4 md:mt-6 text-sm md:text-[19px] font-bold font-sans tracking-[0.2em] md:tracking-[0.3em] uppercase text-accent drop-shadow-lg">
             {renderLetterByLetter("Spaces That Feel Like You", 1000, expandProgress === 1)}
           </p>
         </div>

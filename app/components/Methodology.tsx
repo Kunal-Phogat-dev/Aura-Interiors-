@@ -20,7 +20,7 @@ export default function Methodology() {
             How We Work
           </motion.h3>
           
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight font-serif text-white leading-[1.1] overflow-hidden flex flex-col items-center">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight font-serif text-white leading-tight overflow-hidden flex flex-col items-center">
             <motion.span 
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
@@ -74,7 +74,7 @@ export default function Methodology() {
               <motion.div 
                 variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0 } }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="text-6xl md:text-[5rem] lg:text-[6rem] font-serif text-white/5 group-hover:text-white/10 group-hover:-translate-y-2 transition-all duration-700 mb-6 font-bold"
+                className="text-5xl md:text-[5rem] lg:text-[6rem] font-serif text-white/5 group-hover:text-white/10 group-hover:-translate-y-2 transition-all duration-700 mb-6 font-bold leading-none"
               >
                 {step.num}
               </motion.div>

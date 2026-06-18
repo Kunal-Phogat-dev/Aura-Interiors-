@@ -34,7 +34,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    console.log("3. Checking for duplicate phone number...");
+    console.log("3. Checking for duplicate email in SheetDB...");
+    const sheetdbUrl = process.env.SHEETDB_API_URL?.trim();
+    if (sheetdbUrl && sheetdbUrl.startsWith("http")) {
+      try {
+        const sheetdbRes = await fetch(`${sheetdbUrl}/search?email=${encodeURIComponent(email)}`);
+        if (sheetdbRes.ok) {
+          const sheetData = await sheetdbRes.json();
+          if (Array.isArray(sheetData) && sheetData.length > 0) {
+            console.log("4. Duplicate email found in SheetDB! Returning 409.");
+            return NextResponse.json({ error: 'We already have a consultation request from this email address!' }, { status: 409 });
+          }
+        } else {
+          console.error("SheetDB search failed:", sheetdbRes.statusText);
+        }
+      } catch (err) {
+        console.error("SheetDB fetch error:", err);
+      }
+    } else {
+      console.log("SheetDB URL not configured, skipping SheetDB duplicate check.");
+    }
+
+    // Keep the existing Supabase phone number duplicate check just in case
+    console.log("3b. Checking for duplicate phone number in Supabase...");
     const { data: existingLeads, error: selectError } = await supabase
       .from('leads')
       .select('id')
@@ -45,8 +67,8 @@ export async function POST(request: Request) {
     }
 
     if (existingLeads && existingLeads.length > 0) {
-      console.log("4. Duplicate found! Returning 409.");
-      return NextResponse.json({ error: 'Looks like we already have a request from this number!' }, { status: 409 });
+      console.log("4b. Duplicate phone found! Returning 409.");
+      return NextResponse.json({ error: 'Looks like we already have a request from this phone number!' }, { status: 409 });
     }
 
     console.log("5. Attempting Supabase Insert...");
