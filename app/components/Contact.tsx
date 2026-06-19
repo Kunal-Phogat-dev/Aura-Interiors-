@@ -42,7 +42,7 @@ export default function Contact() {
             setIsSubmitted(false);
             setSelectedService("");
           }, 1000);
-        }, 2000);
+        }, 5000);
       } else if (response.ok) {
         setIsSubmitted(true);
         setTimeout(() => {
@@ -52,7 +52,7 @@ export default function Contact() {
             setIsSubmitted(false);
             setSelectedService("");
           }, 1000);
-        }, 2000);
+        }, 5000);
       } else {
         const errorData = await response.json().catch(() => ({}));
         console.error("Failed to submit, status:", response.status, errorData);
